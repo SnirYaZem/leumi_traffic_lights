@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:leumi_traffic_lights/models/traffic_light_options.dart';
 

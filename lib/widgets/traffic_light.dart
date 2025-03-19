@@ -1,9 +1,5 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:leumi_traffic_lights/models/traffic_light_model.dart';
-import 'package:leumi_traffic_lights/models/traffic_light_options.dart';
 
 class TrafficLight extends StatelessWidget {
   final TrafficLightModel model;
