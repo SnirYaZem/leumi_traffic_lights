@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:leumi_traffic_lights/widgets/traffic_light.dart';
 import 'package:leumi_traffic_lights/widgets/traffic_lights_list.dart';
 import 'package:leumi_traffic_lights/widgets/traffic_lights_mode_button.dart';
 

@@ -15,6 +15,7 @@ class TrafficLight extends StatefulWidget {
 
 class _TrafficLightState extends State<TrafficLight> with AutomaticKeepAliveClientMixin {
   TrafficLightOptions lightOption = TrafficLightOptions.red;
+  bool isCancelled = false;
   Timer? lightTimer;
 
   @override
@@ -26,6 +27,7 @@ class _TrafficLightState extends State<TrafficLight> with AutomaticKeepAliveClie
   @override
   void didUpdateWidget(covariant TrafficLight oldWidget) {
     if (oldWidget.chaosMode != widget.chaosMode) {
+      isCancelled = true;
       initTimer();
     }
     super.didUpdateWidget(oldWidget);
@@ -39,33 +41,48 @@ class _TrafficLightState extends State<TrafficLight> with AutomaticKeepAliveClie
       });
     }
     Future.delayed(Duration(milliseconds: widget.chaosMode ? Random().nextInt(5001) : 0), () {
+      isCancelled = false;
+      _doTrafficLightsCycle();
       lightTimer = Timer.periodic(Duration(seconds: 9), (timer) async {
-        if (mounted) {
-          setState(() {
-            lightOption = TrafficLightOptions.red;
-          });
-        }
-        await Future.delayed(Duration(milliseconds: 3000));
-        if (mounted) {
-          setState(() {
-            lightOption = TrafficLightOptions.redAndYellow;
-          });
-        }
-        await Future.delayed(Duration(milliseconds: 1500));
-        if (mounted) {
-          setState(() {
-            lightOption = TrafficLightOptions.green;
-          });
-        }
-        await Future.delayed(Duration(milliseconds: 3000));
-        if (mounted) {
-          setState(() {
-            lightOption = TrafficLightOptions.yellow;
-          });
-        }
-        await Future.delayed(Duration(milliseconds: 1500));
+        await _doTrafficLightsCycle();
       });
     });
+  }
+
+  Future<void> _doTrafficLightsCycle() async {
+    if (isCancelled) return;
+    if (mounted) {
+      setState(() {
+        lightOption = TrafficLightOptions.red;
+      });
+    }
+    if (isCancelled) return;
+    await Future.delayed(Duration(milliseconds: 3000));
+    if (isCancelled) return;
+    if (mounted) {
+      setState(() {
+        lightOption = TrafficLightOptions.redAndYellow;
+      });
+    }
+    if (isCancelled) return;
+    await Future.delayed(Duration(milliseconds: 1500));
+    if (isCancelled) return;
+    if (mounted) {
+      setState(() {
+        lightOption = TrafficLightOptions.green;
+      });
+    }
+    if (isCancelled) return;
+    await Future.delayed(Duration(milliseconds: 3000));
+    if (isCancelled) return;
+    if (mounted) {
+      setState(() {
+        lightOption = TrafficLightOptions.yellow;
+      });
+    }
+    if (isCancelled) return;
+    await Future.delayed(Duration(milliseconds: 1500));
+    if (isCancelled) return;
   }
 
   @override

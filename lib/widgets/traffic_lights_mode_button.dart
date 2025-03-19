@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leumi_traffic_lights/cubit/traffic_lights_cubit.dart';
 
 class TrafficLightsModeButton extends StatefulWidget {
   final void Function(bool chaosMode)? onPressed;

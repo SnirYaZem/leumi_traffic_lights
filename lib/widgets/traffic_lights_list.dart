@@ -8,17 +8,17 @@ class TrafficLightsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
+    return GridView(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 5,
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
         mainAxisExtent: 154,
       ),
-      itemBuilder: (context, index) {
+      shrinkWrap: true,
+      children: List.generate(1000, (index) {
         return TrafficLight(chaosMode: chaosMode);
-      },
-      itemCount: 1000,
+      }),
     );
   }
 }
